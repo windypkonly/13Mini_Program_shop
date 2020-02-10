@@ -1,0 +1,31 @@
+<!--pages/home/home.wxml-->
+<view class='home'>
+  <view hidden='{{!showTabControl}}'>
+    <w-tab-control class='tab-control-temp' 
+                 titles="{{titles}}" 
+                 bind:tabclick="tabClick"/>
+  </view>
+  
+  <scroll-view class='content' 
+              scroll-y 
+              bindscrolltolower="loadMore"
+              scroll-with-animation="true"
+              scroll-top="{{topPosition}}"
+              bindscroll="scrollPosition">
+    <!-- 1 轮播图组件 commponets/w-swiper -->
+    <w-swiper images="{{banners}}"/>
+
+    <!-- 2 热门推荐组件 home/childCpns/w-recommend-->
+    <w-recommend recommends="{{recommends}}" bind:imageLoad="onImageLoad"/>
+
+    <!-- 3 本周流行组件 home/childCpns/w-feature-->
+    <w-feature/>
+
+
+    <w-tab-control class='tab-control' titles="{{titles}}" bind:tabclick="tabClick"/>
+    
+    <w-goods goodslist="{{goods[currentType].list}}"/>
+   
+    <w-back-top bindtap="onBackTop" wx:if="{{showBackTop}}"/>
+  </scroll-view> 
+</view>
